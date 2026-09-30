@@ -1,0 +1,435 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f1f1f1;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dashboard-page {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px;
+  background: #f1f1f1;
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 1100px;
+  min-height: 650px;
+
+  display: flex;
+  gap: 25px;
+
+  padding: 55px;
+
+  background: #d9d9d9;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  width: 265px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.welcome-card {
+  height: 98px;
+
+  padding: 17px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background: #fff;
+
+  border-radius: 7px;
+}
+
+.welcome-text {
+  font-size: 16px;
+  color: #222;
+
+  margin-bottom: 10px;
+}
+
+.welcome-line {
+  width: 72%;
+  height: 2px;
+
+  background: #222;
+
+  margin-bottom: 10px;
+}
+
+/* Sidebar Cards */
+
+.sidebar-card {
+  height: 105px;
+
+  background: #fff;
+
+  border-radius: 7px;
+
+  overflow: hidden;
+}
+
+.sidebar-header {
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 5px;
+
+  background: #999;
+}
+
+.sidebar-header-text {
+  font-size: 13px;
+  color: #222;
+}
+
+.sidebar-body {
+  height: calc(100% - 27px);
+
+  padding: 12px 17px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.large-value {
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #222;
+
+  margin-bottom: 4px;
+}
+
+.small-description {
+  font-size: 10px;
+
+  color: #777;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.title-card {
+  height: 56px;
+
+  padding: 9px 15px;
+
+  background: #fff;
+
+  border-radius: 7px;
+}
+
+.dashboard-title {
+  font-size: 14px;
+  color: #222;
+}
+
+.title-line {
+  width: 72%;
+  height: 2px;
+
+  background: #222;
+
+  margin-left: 35px;
+  margin-top: 7px;
+}
+
+/* =========================
+   ENVIRONMENTAL DATA
+========================= */
+
+.environment-section {
+  background: #999;
+
+  border-radius: 7px;
+
+  padding-bottom: 6px;
+}
+
+.environment-title {
+  font-size: 13px;
+  color: #222;
+
+  padding: 5px 7px;
+}
+
+.sensor-row {
+  display: flex;
+
+  gap: 7px;
+
+  padding: 0 2px;
+}
+
+.sensor-card {
+  flex: 1;
+
+  min-height: 57px;
+
+  padding: 6px 7px;
+
+  background: #fff;
+
+  border-radius: 7px;
+}
+
+.sensor-title {
+  font-size: 12px;
+  color: #333;
+}
+
+.sensor-line {
+  width: 90%;
+  height: 2px;
+
+  background: #222;
+
+  margin-top: 5px;
+}
+
+.sensor-value {
+  font-size: 11px;
+
+  color: #555;
+
+  margin-top: 4px;
+
+  font-weight: 500;
+}
+
+/* =========================
+   TRENDS
+========================= */
+
+.trends-card {
+  flex: 1;
+
+  min-height: 250px;
+
+  background: #fff;
+
+  border-radius: 7px;
+
+  overflow: hidden;
+}
+
+.trends-header {
+  min-height: 28px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 4px 7px;
+
+  background: #999;
+}
+
+.trends-title {
+  font-size: 14px;
+
+  color: #222;
+
+  margin-right: 12px;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tab {
+  height: 20px;
+  min-width: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 8px;
+
+  margin-right: 5px;
+
+  background: #fff;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: #eee;
+}
+
+.tab.active {
+  background: #eee;
+
+  border: 1px solid #555;
+}
+
+.tab-text {
+  font-size: 9px;
+
+  color: #222;
+
+  font-weight: 600;
+}
+
+/* =========================
+   GRAPH
+========================= */
+
+.graph-container {
+  width: 100%;
+
+  min-height: 220px;
+
+  padding: 15px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.graph {
+  position: relative;
+
+  width: 100%;
+  height: 205px;
+
+  max-width: 700px;
+}
+
+.graph-y-axis {
+  position: absolute;
+
+  left: 30px;
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background: #222;
+}
+
+.graph-x-axis {
+  position: absolute;
+
+  left: 30px;
+  right: 0;
+  bottom: 0;
+
+  height: 2px;
+
+  background: #222;
+}
+
+.graph-point {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #444;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+  .dashboard-page {
+    padding: 10px;
+
+    align-items: flex-start;
+  }
+
+  .dashboard {
+    flex-direction: column;
+
+    padding: 20px;
+
+    min-height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .sensor-row {
+    flex-wrap: wrap;
+  }
+
+  .sensor-card {
+    min-width: calc(50% - 7px);
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .dashboard {
+    padding: 12px;
+
+    gap: 15px;
+  }
+
+  .sensor-card {
+    min-width: 100%;
+  }
+
+  .trends-header {
+    flex-wrap: wrap;
+
+    gap: 4px;
+  }
+
+}

@@ -1,0 +1,2384 @@
+/* =========================================================
+   FRENDS / AIR QUALITY MONITORING DASHBOARD
+   MODERN BLACK • CHARCOAL • OFF-WHITE • YELLOW
+========================================================= */
+
+/* =========================================================
+   COLOR SYSTEM
+========================================================= */
+
+:root {
+  --black: #111111;
+  --charcoal: #2f2f2f;
+  --white: #ffffff;
+  --off-white: #f6f6f6;
+  --cream: #fff8eb;
+  --yellow: #ffcb74;
+  --yellow-light: #ffda98;
+  --yellow-dark: #e9aa4e;
+
+  --green: #55b88a;
+  --red: #e56b6f;
+  --gray: #8a8a8a;
+  --light-gray: #d9d9d9;
+
+  --page-bg: #f6f6f6;
+  --card-bg: #ffffff;
+  --secondary-bg: #eeeeee;
+  --text-primary: #111111;
+  --text-secondary: #686868;
+  --border: rgba(17, 17, 17, 0.08);
+  --shadow: rgba(17, 17, 17, 0.1);
+}
+
+/* =========================================================
+   DARK MODE VARIABLES
+========================================================= */
+
+body.dark-mode {
+  --page-bg: #111111;
+  --card-bg: #2f2f2f;
+  --secondary-bg: #242424;
+
+  --text-primary: #f6f6f6;
+  --text-secondary: #b8b8b8;
+
+  --border: rgba(255, 255, 255, 0.09);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    "Plus Jakarta Sans",
+    Inter,
+    Arial,
+    sans-serif;
+
+  background: var(--page-bg);
+  color: var(--text-primary);
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.dashboard-page {
+  min-height: 100vh;
+  padding: 28px;
+
+  background:
+    radial-gradient(
+      circle at 90% 5%,
+      rgba(255, 203, 116, 0.18),
+      transparent 25%
+    ),
+    var(--page-bg);
+
+  transition: background 0.35s ease;
+}
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.dashboard {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+
+  gap: 22px;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  min-width: 0;
+}
+
+/* =========================================================
+   WELCOME CARD
+========================================================= */
+
+.welcome-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 24px;
+
+  min-height: 145px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--yellow),
+      var(--yellow-light)
+    );
+
+  color: var(--black);
+
+  box-shadow:
+    0 14px 30px rgba(255, 203, 116, 0.25);
+
+  border: 1px solid rgba(255, 203, 116, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.welcome-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+  height: 120px;
+
+  right: -45px;
+  top: -45px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.welcome-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 55px;
+  height: 55px;
+
+  left: -25px;
+  bottom: -25px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.welcome-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 40px rgba(255, 203, 116, 0.35);
+}
+
+.welcome-title {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  color: var(--black);
+}
+
+.welcome-text {
+  position: relative;
+  z-index: 2;
+
+  margin: 8px 0 0;
+
+  color: rgba(17, 17, 17, 0.65);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   SIDEBAR CARDS
+========================================================= */
+
+.sidebar-card {
+  overflow: hidden;
+
+  border-radius: 21px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 10px 25px var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.sidebar-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 32px var(--shadow);
+
+  border-color: rgba(255, 203, 116, 0.35);
+}
+
+/* =========================================================
+   SIDEBAR HEADER
+========================================================= */
+
+.sidebar-header {
+  padding: 15px 18px;
+
+  background: var(--charcoal);
+
+  color: var(--off-white);
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+body.dark-mode .sidebar-header {
+  background: #111111;
+}
+
+.sidebar-header-text {
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   SIDEBAR BODY
+========================================================= */
+
+.sidebar-body {
+  padding: 20px;
+}
+
+.large-value {
+  margin: 0;
+
+  font-size: 34px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  color: var(--text-primary);
+
+  transition: color 0.35s ease;
+}
+
+.small-description {
+  margin-top: 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 10px;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.04);
+}
+
+.status-badge::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+/* NORMAL */
+
+.status-normal {
+  color: #2f7f5f;
+  background: rgba(85, 184, 138, 0.14);
+}
+
+.status-normal::before {
+  background: var(--green);
+
+  box-shadow:
+    0 0 0 4px rgba(85, 184, 138, 0.12);
+}
+
+/* WARNING */
+
+.status-warning {
+  color: #9a681d;
+  background: rgba(255, 203, 116, 0.22);
+}
+
+.status-warning::before {
+  background: var(--yellow-dark);
+
+  box-shadow:
+    0 0 0 4px rgba(255, 203, 116, 0.15);
+}
+
+/* CRITICAL */
+
+.status-critical {
+  color: #b64c51;
+  background: rgba(229, 107, 111, 0.13);
+}
+
+.status-critical::before {
+  background: var(--red);
+
+  box-shadow:
+    0 0 0 4px rgba(229, 107, 111, 0.12);
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+  min-width: 0;
+}
+
+/* =========================================================
+   TITLE CARD
+========================================================= */
+
+.title-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 30px;
+
+  margin-bottom: 22px;
+
+  border-radius: 25px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 12px 30px var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.title-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: -70px;
+  top: -80px;
+
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  opacity: 0.25;
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.3s ease;
+}
+
+.title-card:hover::after {
+  transform: scale(1.25);
+
+  opacity: 0.4;
+}
+
+.dashboard-title {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: clamp(25px, 3vw, 38px);
+
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  transition: color 0.35s ease;
+}
+
+.title-subtitle {
+  position: relative;
+  z-index: 2;
+
+  margin: 10px 0 0;
+
+  max-width: 650px;
+
+  color: var(--text-secondary);
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  transition: color 0.35s ease;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.environment-section {
+  margin-bottom: 22px;
+}
+
+.section-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 15px;
+}
+
+.section-title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 20px;
+  font-weight: 800;
+
+  transition: color 0.35s ease;
+}
+
+.selected-node-text {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   SENSOR GRID
+========================================================= */
+
+.sensor-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+/* =========================================================
+   SENSOR CARD
+========================================================= */
+
+.sensor-card {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 170px;
+
+  padding: 22px;
+
+  border-radius: 22px;
+
+  background: var(--card-bg);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 10px 25px var(--shadow);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.35s ease;
+
+  cursor: default;
+}
+
+.sensor-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 90px;
+  height: 90px;
+
+  right: -35px;
+  top: -35px;
+
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  opacity: 0.12;
+
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease;
+}
+
+.sensor-card:hover {
+  transform: translateY(-7px);
+
+  border-color: rgba(255, 203, 116, 0.45);
+
+  box-shadow:
+    0 18px 38px var(--shadow);
+}
+
+.sensor-card:hover::before {
+  transform: scale(1.5);
+
+  opacity: 0.22;
+}
+
+/* =========================================================
+   TEMPERATURE CARD
+========================================================= */
+
+.sensor-temperature {
+  background:
+    linear-gradient(
+      145deg,
+      var(--yellow),
+      #ffda98
+    );
+
+  border-color: transparent;
+
+  color: var(--black);
+
+  box-shadow:
+    0 12px 30px rgba(255, 203, 116, 0.25);
+}
+
+.sensor-temperature:hover {
+  box-shadow:
+    0 20px 40px rgba(255, 203, 116, 0.35);
+}
+
+/* =========================================================
+   HUMIDITY CARD
+========================================================= */
+
+.sensor-humidity {
+  background: var(--card-bg);
+}
+
+/* =========================================================
+   PRESSURE CARD
+========================================================= */
+
+.sensor-pressure {
+  background: var(--charcoal);
+
+  color: var(--off-white);
+
+  border-color: transparent;
+
+  box-shadow:
+    0 12px 30px rgba(17, 17, 17, 0.2);
+}
+
+body.dark-mode .sensor-pressure {
+  background: #202020;
+}
+
+.sensor-pressure:hover {
+  border-color: rgba(255, 203, 116, 0.3);
+
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   AIR QUALITY CARD
+========================================================= */
+
+.sensor-air {
+  background: var(--card-bg);
+}
+
+/* =========================================================
+   SENSOR TEXT
+========================================================= */
+
+.sensor-title {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+
+  transition: color 0.35s ease;
+}
+
+.sensor-value {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 15px;
+
+  color: var(--text-primary);
+
+  font-size: 32px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  transition:
+    color 0.35s ease,
+    transform 0.25s ease;
+}
+
+.sensor-card:hover .sensor-value {
+  transform: scale(1.03);
+}
+
+.sensor-description {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 8px;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  transition: color 0.35s ease;
+}
+
+/* Temperature text */
+
+.sensor-temperature .sensor-title,
+.sensor-temperature .sensor-description,
+.sensor-temperature .sensor-value {
+  color: var(--black);
+}
+
+/* Pressure text */
+
+.sensor-pressure .sensor-title {
+  color: rgba(246, 246, 246, 0.65);
+}
+
+.sensor-pressure .sensor-description {
+  color: rgba(246, 246, 246, 0.55);
+}
+
+.sensor-pressure .sensor-value {
+  color: var(--off-white);
+}
+
+/* =========================================================
+   SENSOR STATUS
+========================================================= */
+
+.sensor-status {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-top: 13px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  background: rgba(17, 17, 17, 0.07);
+
+  color: var(--text-primary);
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.sensor-status:hover {
+  transform: translateY(-2px);
+}
+
+.sensor-temperature .sensor-status {
+  background: rgba(17, 17, 17, 0.1);
+  color: var(--black);
+}
+
+.sensor-pressure .sensor-status {
+  background: rgba(255, 243, 226, 0.12);
+  color: var(--off-white);
+}
+
+/* =========================================================
+   SENSOR STATUS COLORS
+========================================================= */
+
+.sensor-status.good {
+  color: #2f7f5f;
+  background: rgba(85, 184, 138, 0.13);
+}
+
+.sensor-status.moderate {
+  color: #8a621e;
+  background: rgba(255, 203, 116, 0.22);
+}
+
+.sensor-status.warning {
+  color: #94651d;
+  background: rgba(255, 203, 116, 0.24);
+}
+
+.sensor-status.critical {
+  color: #b64c51;
+  background: rgba(229, 107, 111, 0.13);
+}
+
+/* =========================================================
+   TRENDS CARD
+========================================================= */
+
+.trends-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 25px;
+
+  border-radius: 24px;
+
+  background: var(--charcoal);
+
+  color: var(--off-white);
+
+  box-shadow:
+    0 15px 35px var(--shadow);
+
+  transition:
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.trends-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: -80px;
+  bottom: -90px;
+
+  border-radius: 50%;
+
+  background: var(--yellow);
+
+  opacity: 0.08;
+
+  transition:
+    transform 0.5s ease,
+    opacity 0.3s ease;
+}
+
+.trends-card:hover::before {
+  transform: scale(1.3);
+
+  opacity: 0.13;
+}
+
+.trends-header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.trends-title {
+  margin: 0;
+
+  color: var(--off-white);
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.trends-subtitle {
+  margin: 5px 0 0;
+
+  color: rgba(246, 246, 246, 0.58);
+
+  font-size: 11px;
+}
+
+/* =========================================================
+   HISTORY BUTTON
+========================================================= */
+
+.tab {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 42px;
+
+  padding: 10px 18px;
+
+  border: 1px solid transparent;
+
+  border-radius: 12px;
+
+  background: var(--yellow);
+
+  color: var(--black);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.tab::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+
+  transition: left 0.45s ease;
+}
+
+.tab:hover {
+  transform: translateY(-3px);
+
+  background: var(--yellow-light);
+
+  box-shadow:
+    0 9px 20px rgba(255, 203, 116, 0.2);
+}
+
+.tab:hover::before {
+  left: 100%;
+}
+
+.tab:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.tab:focus-visible {
+  outline: 3px solid rgba(255, 203, 116, 0.35);
+
+  outline-offset: 3px;
+}
+
+.tab-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   TREND INFORMATION
+========================================================= */
+
+.trend-information {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 13px;
+}
+
+.trend-information > div {
+  padding: 18px;
+
+  border-radius: 17px;
+
+  background: rgba(246, 246, 246, 0.07);
+
+  border: 1px solid rgba(246, 246, 246, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.trend-information > div:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 203, 116, 0.1);
+
+  border-color: rgba(255, 203, 116, 0.2);
+}
+
+.trend-information-title {
+  color: rgba(246, 246, 246, 0.55);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.trend-information-value {
+  margin-top: 8px;
+
+  color: var(--yellow);
+
+  font-size: 23px;
+  font-weight: 800;
+
+  transition: transform 0.25s ease;
+}
+
+.trend-information > div:hover .trend-information-value {
+  transform: translateX(3px);
+}
+
+.trend-information-description {
+  margin-top: 5px;
+
+  color: rgba(246, 246, 246, 0.5);
+
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.history-container {
+  position: relative;
+  z-index: 2;
+
+  margin-top: 18px;
+
+  animation: historyAppear 0.3s ease;
+}
+
+@keyframes historyAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.history-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.history-card {
+  padding: 19px;
+
+  border-radius: 18px;
+
+  background: rgba(246, 246, 246, 0.07);
+
+  border: 1px solid rgba(246, 246, 246, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-4px);
+
+  background: rgba(255, 203, 116, 0.09);
+
+  border-color: rgba(255, 203, 116, 0.2);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.history-card-title {
+  margin-bottom: 12px;
+
+  color: var(--off-white);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.history-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 9px 0;
+
+  border-bottom:
+    1px solid rgba(246, 246, 246, 0.06);
+}
+
+.history-row:last-child {
+  border-bottom: none;
+}
+
+.history-node {
+  color: rgba(246, 246, 246, 0.55);
+
+  font-size: 10px;
+}
+
+.history-value {
+  color: var(--yellow);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.history-description {
+  margin-top: 11px;
+
+  color: rgba(246, 246, 246, 0.45);
+
+  font-size: 10px;
+}
+
+/* =========================================================
+   NODE BUTTONS
+========================================================= */
+
+.node-selector {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  margin-bottom: 10px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+}
+
+.node-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+}
+
+.node-button {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 40px;
+
+  padding: 9px 15px;
+
+  border-radius: 11px;
+
+  border: 1px solid var(--border);
+
+  background: var(--card-bg);
+
+  color: var(--text-primary);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.node-button:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 7px 15px var(--shadow);
+}
+
+.node-button.active {
+  background: var(--yellow);
+
+  color: var(--black);
+
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 7px 18px rgba(255, 203, 116, 0.25);
+}
+
+.node-button:active {
+  transform: scale(0.96);
+}
+
+.node-button:focus-visible {
+  outline: 3px solid rgba(255, 203, 116, 0.3);
+
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-toggle {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 9px 15px;
+
+  border-radius: 12px;
+
+  border: 1px solid var(--border);
+
+  background: var(--card-bg);
+
+  color: var(--text-primary);
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 15px var(--shadow);
+
+  transition:
+    transform 0.2s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+
+  background: var(--yellow);
+
+  color: var(--black);
+
+  border-color: var(--yellow);
+
+  box-shadow:
+    0 8px 20px rgba(255, 203, 116, 0.2);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid rgba(255, 203, 116, 0.3);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   GENERAL BUTTON INTERACTION
+========================================================= */
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.5;
+
+  transform: none !important;
+
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--page-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--charcoal);
+
+  border-radius: 999px;
+
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--yellow-dark);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #555555;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--yellow);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns:
+      230px minmax(0, 1fr);
+  }
+
+  .sensor-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .trend-information {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — SMALL TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .welcome-card {
+    grid-column: 1 / -1;
+  }
+
+  .title-card {
+    padding: 25px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .dashboard-page {
+    padding: 14px;
+  }
+
+  .dashboard {
+    gap: 15px;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .title-card {
+    padding: 22px;
+
+    border-radius: 21px;
+  }
+
+  .dashboard-title {
+    font-size: 26px;
+  }
+
+  .title-subtitle {
+    font-size: 12px;
+  }
+
+  .sensor-grid {
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+  }
+
+  .sensor-card {
+    min-height: 155px;
+
+    padding: 20px;
+  }
+
+  .sensor-value {
+    font-size: 30px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .trends-card {
+    padding: 20px;
+
+    border-radius: 21px;
+  }
+
+  .trends-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .tab {
+    width: 100%;
+  }
+
+  .trend-information {
+    grid-template-columns: 1fr;
+  }
+
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-toggle {
+    min-height: 44px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — SMALL PHONE
+========================================================= */
+
+@media (max-width: 420px) {
+  .dashboard-page {
+    padding: 10px;
+  }
+
+  .welcome-card,
+  .title-card,
+  .trends-card {
+    border-radius: 18px;
+  }
+
+  .dashboard-title {
+    font-size: 23px;
+  }
+
+  .sensor-card {
+    min-height: 145px;
+  }
+
+  .sensor-value {
+    font-size: 28px;
+  }
+
+  .large-value {
+    font-size: 30px;
+  }
+
+  .sidebar-body {
+    padding: 17px;
+  }
+}
+
+/* =========================================================
+   ENTRY ANIMATIONS
+========================================================= */
+
+@keyframes dashboardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard {
+  animation: dashboardFadeIn 0.45s ease both;
+}
+
+.sensor-card {
+  animation:
+    dashboardFadeIn 0.5s ease both;
+}
+
+.sensor-card:nth-child(1) {
+  animation-delay: 0.05s;
+}
+
+.sensor-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.sensor-card:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.sensor-card:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+/* =========================================================
+   SUBTLE LIVE INDICATOR
+========================================================= */
+
+@keyframes livePulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.status-normal::before {
+  animation:
+    livePulse 1.8s ease-in-out infinite;
+}
+
+/* =========================================================
+   HOVER DEVICES ONLY
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .sensor-card,
+  .sidebar-card,
+  .history-card,
+  .trend-information > div {
+    will-change: transform;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   SENSOR CARDS — UNIFIED DARK STYLE
+   ========================================================= */
+
+.sensor-card {
+  background: #2f2f2f !important;
+  color: #f6f6f6 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.3s ease;
+}
+
+/* Make ALL four cards identical */
+.sensor-temperature,
+.sensor-humidity,
+.sensor-pressure,
+.sensor-air {
+  background: #2f2f2f !important;
+  color: #f6f6f6 !important;
+}
+
+/* Sensor titles */
+.sensor-card .sensor-title {
+  color: #f6f6f6 !important;
+}
+
+/* Main values */
+.sensor-card .sensor-value {
+  color: #ffffff !important;
+}
+
+/* Descriptions */
+.sensor-card .sensor-description {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Icons */
+.sensor-card .sensor-icon {
+  color: #ffffff !important;
+}
+
+/* Status pills */
+.sensor-card .sensor-status {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   HOVER EFFECT
+   ========================================================= */
+
+.sensor-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(255, 203, 116, 0.15);
+}
+
+
+/* =========================================================
+   DARK MODE — LIGHT GLOWING CARDS
+   ========================================================= */
+
+html.dark-mode .sensor-card,
+body.dark-mode .sensor-card,
+html.dark-mode .sensor-temperature,
+html.dark-mode .sensor-humidity,
+html.dark-mode .sensor-pressure,
+html.dark-mode .sensor-air,
+body.dark-mode .sensor-temperature,
+body.dark-mode .sensor-humidity,
+body.dark-mode .sensor-pressure,
+body.dark-mode .sensor-air {
+  background: #f6f6f6 !important;
+  color: #111111 !important;
+
+  border: 1px solid rgba(255, 203, 116, 0.35);
+
+  box-shadow:
+    0 10px 35px rgba(255, 255, 255, 0.08),
+    0 0 25px rgba(255, 203, 116, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+
+/* Dark mode text */
+html.dark-mode .sensor-card .sensor-title,
+body.dark-mode .sensor-card .sensor-title {
+  color: #111111 !important;
+}
+
+html.dark-mode .sensor-card .sensor-value,
+body.dark-mode .sensor-card .sensor-value {
+  color: #111111 !important;
+}
+
+html.dark-mode .sensor-card .sensor-description,
+body.dark-mode .sensor-card .sensor-description {
+  color: #666666 !important;
+}
+
+html.dark-mode .sensor-card .sensor-icon,
+body.dark-mode .sensor-card .sensor-icon {
+  color: #111111 !important;
+}
+
+
+/* Dark mode status */
+html.dark-mode .sensor-card .sensor-status,
+body.dark-mode .sensor-card .sensor-status {
+  background: #e9e9e9 !important;
+  color: #222222 !important;
+}
+
+
+/* Dark mode hover = stronger light effect */
+html.dark-mode .sensor-card:hover,
+body.dark-mode .sensor-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 18px 45px rgba(255, 255, 255, 0.12),
+    0 0 35px rgba(255, 203, 116, 0.25),
+    0 0 70px rgba(255, 203, 116, 0.08);
+}
+
+/* =========================================================
+   DASHBOARD TITLE CARD — SAME THEME AS SENSOR CARDS
+   ========================================================= */
+
+.title-card {
+  background: #2f2f2f !important;
+  color: #f6f6f6 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.3s ease;
+}
+
+/* Dashboard title */
+.title-card .dashboard-title {
+  color: #f6f6f6 !important;
+}
+
+/* Subtitle */
+.title-card .title-subtitle {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+/* Decorative circle */
+.title-card .title-orb {
+  background: rgba(255, 203, 116, 0.18) !important;
+}
+
+
+/* =========================================================
+   DARK MODE — LIGHT DASHBOARD CARD
+   ========================================================= */
+
+html.dark-mode .title-card,
+body.dark-mode .title-card {
+  background: #f6f6f6 !important;
+  color: #111111 !important;
+
+  border: 1px solid rgba(255, 203, 116, 0.35);
+
+  box-shadow:
+    0 10px 35px rgba(255, 255, 255, 0.08),
+    0 0 25px rgba(255, 203, 116, 0.12),
+    0 0 60px rgba(255, 203, 116, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Dark mode title */
+html.dark-mode .title-card .dashboard-title,
+body.dark-mode .title-card .dashboard-title {
+  color: #111111 !important;
+}
+
+/* Dark mode subtitle */
+html.dark-mode .title-card .title-subtitle,
+body.dark-mode .title-card .title-subtitle {
+  color: #666666 !important;
+}
+
+/* Dark mode decorative circle */
+html.dark-mode .title-card .title-orb,
+body.dark-mode .title-card .title-orb {
+  background: rgba(255, 203, 116, 0.28) !important;
+}
+
+
+/* =========================================================
+   TITLE CARD HOVER
+   ========================================================= */
+
+.title-card:hover {
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.20),
+    0 0 25px rgba(255, 203, 116, 0.10);
+}
+
+html.dark-mode .title-card:hover,
+body.dark-mode .title-card:hover {
+  box-shadow:
+    0 18px 45px rgba(255, 255, 255, 0.12),
+    0 0 35px rgba(255, 203, 116, 0.25),
+    0 0 70px rgba(255, 203, 116, 0.08);
+}
+
+/* =========================================================
+   TRENDS — SAME THEME AS SENSOR CARDS
+   ========================================================= */
+
+.trends-card {
+  background: #2f2f2f !important;
+  color: #f6f6f6 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+
+/* =========================================================
+   TRENDS TEXT
+   ========================================================= */
+
+.trends-card .trends-title {
+  color: #f6f6f6 !important;
+}
+
+.trends-card .trends-subtitle {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+
+
+/* =========================================================
+   HISTORY BUTTON
+   ========================================================= */
+
+.trends-card .tab {
+  background: #ffcb74 !important;
+  color: #111111 !important;
+
+  border: none !important;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.trends-card .tab:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(255, 203, 116, 0.25);
+}
+
+.trends-card .tab-text {
+  color: #111111 !important;
+}
+
+
+/* =========================================================
+   TREND SUMMARY CARDS
+   ========================================================= */
+
+.trend-item {
+  background: #3a3a3a !important;
+  color: #f6f6f6 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    background 0.3s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+.trend-item:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 203, 116, 0.1);
+}
+
+.trend-information-title {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.trend-information-value {
+  color: #ffcb74 !important;
+}
+
+.trend-information-description {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+
+/* =========================================================
+   HISTORY CARDS
+   ========================================================= */
+
+.history-card {
+  background: #3a3a3a !important;
+  color: #f6f6f6 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.history-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 203, 116, 0.1);
+}
+
+.history-card-title {
+  color: #f6f6f6 !important;
+}
+
+.history-node {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.history-value {
+  color: #ffcb74 !important;
+}
+
+.history-description {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.history-row {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+
+/* =========================================================
+   DARK MODE — LIGHT TRENDS
+   ========================================================= */
+
+html.dark-mode .trends-card,
+body.dark-mode .trends-card {
+  background: #f6f6f6 !important;
+  color: #111111 !important;
+
+  border: 1px solid rgba(255, 203, 116, 0.35);
+
+  box-shadow:
+    0 10px 35px rgba(255, 255, 255, 0.08),
+    0 0 25px rgba(255, 203, 116, 0.12),
+    0 0 60px rgba(255, 203, 116, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+
+/* =========================================================
+   DARK MODE — TRENDS TEXT
+   ========================================================= */
+
+html.dark-mode .trends-card .trends-title,
+body.dark-mode .trends-card .trends-title {
+  color: #111111 !important;
+}
+
+html.dark-mode .trends-card .trends-subtitle,
+body.dark-mode .trends-card .trends-subtitle {
+  color: #666666 !important;
+}
+
+
+/* =========================================================
+   DARK MODE — TREND SUMMARY
+   ========================================================= */
+
+html.dark-mode .trend-item,
+body.dark-mode .trend-item {
+  background: #ffffff !important;
+  color: #111111 !important;
+
+  border: 1px solid rgba(17, 17, 17, 0.08);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+html.dark-mode .trend-information-title,
+body.dark-mode .trend-information-title {
+  color: #666666 !important;
+}
+
+html.dark-mode .trend-information-value,
+body.dark-mode .trend-information-value {
+  color: #111111 !important;
+}
+
+html.dark-mode .trend-information-description,
+body.dark-mode .trend-information-description {
+  color: #777777 !important;
+}
+
+
+/* =========================================================
+   DARK MODE — HISTORY
+   ========================================================= */
+
+html.dark-mode .history-card,
+body.dark-mode .history-card {
+  background: #ffffff !important;
+  color: #111111 !important;
+
+  border: 1px solid rgba(17, 17, 17, 0.08);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+html.dark-mode .history-card-title,
+body.dark-mode .history-card-title {
+  color: #111111 !important;
+}
+
+html.dark-mode .history-node,
+body.dark-mode .history-node {
+  color: #777777 !important;
+}
+
+html.dark-mode .history-value,
+body.dark-mode .history-value {
+  color: #111111 !important;
+}
+
+html.dark-mode .history-description,
+body.dark-mode .history-description {
+  color: #777777 !important;
+}
+
+html.dark-mode .history-row,
+body.dark-mode .history-row {
+  border-bottom-color: rgba(17, 17, 17, 0.08) !important;
+}
+
+
+/* =========================================================
+   DARK MODE — TRENDS GLOW
+   ========================================================= */
+
+html.dark-mode .trends-card:hover,
+body.dark-mode .trends-card:hover {
+  box-shadow:
+    0 18px 45px rgba(255, 255, 255, 0.12),
+    0 0 35px rgba(255, 203, 116, 0.22),
+    0 0 70px rgba(255, 203, 116, 0.08);
+}
+
+html.dark-mode .trend-item:hover,
+body.dark-mode .trend-item:hover,
+html.dark-mode .history-card:hover,
+body.dark-mode .history-card:hover {
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.1),
+    0 0 25px rgba(255, 203, 116, 0.18);
+}
+
+/* =========================================================
+   TWO-PANEL SCROLLING LAYOUT
+   LEFT SIDEBAR + RIGHT CONTENT
+   ========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+}
+
+
+/* Main dashboard fills the browser */
+.dashboard-page {
+  width: 100%;
+  height: 100vh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+
+/* Two-column dashboard */
+.dashboard {
+  width: 100%;
+  height: 100vh !important;
+  min-height: 0 !important;
+
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   LEFT SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  height: 100vh !important;
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  scrollbar-width: thin;
+
+  /* keep your existing sidebar spacing */
+  padding-bottom: 30px;
+}
+
+
+/* WELCOME STAYS AT THE TOP */
+.welcome-card {
+  position: sticky !important;
+  top: 0 !important;
+
+  z-index: 20;
+
+  /* Prevent cards from showing through it */
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   RIGHT SIDE — ONLY THIS AREA SCROLLS
+   ========================================================= */
+
+.main-content {
+  height: 100vh !important;
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding-bottom: 50px;
+
+  scrollbar-width: thin;
+}
+
+
+/* Don't create another scrollbar inside these sections */
+.environment-section,
+.trends-card,
+.history-container {
+  overflow: visible !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR STYLING
+   ========================================================= */
+
+/* Chrome / Edge / Safari */
+
+.sidebar::-webkit-scrollbar,
+.main-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.main-content::-webkit-scrollbar-thumb {
+  background: rgba(47, 47, 47, 0.35);
+  border-radius: 20px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(47, 47, 47, 0.6);
+}
+
+
+/* =========================================================
+   DARK MODE SCROLLBARS
+   ========================================================= */
+
+html.dark-mode .sidebar::-webkit-scrollbar-thumb,
+html.dark-mode .main-content::-webkit-scrollbar-thumb,
+body.dark-mode .sidebar::-webkit-scrollbar-thumb,
+body.dark-mode .main-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 203, 116, 0.45);
+}
+
+html.dark-mode .sidebar::-webkit-scrollbar-thumb:hover,
+html.dark-mode .main-content::-webkit-scrollbar-thumb:hover,
+body.dark-mode .sidebar::-webkit-scrollbar-thumb:hover,
+body.dark-mode .main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 203, 116, 0.75);
+}
+
+/* =========================================================
+   SIDEBAR STATUS BADGES — KEEP INSIDE CARD
+   ========================================================= */
+
+.sidebar-card .status-badge {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content !important;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 7px 12px !important;
+  margin: 8px 0 0 0 !important;
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* Make the sidebar body distribute the content properly */
+.sidebar-card .sidebar-body {
+  display: flex !important;
+  flex-direction: column;
+
+  justify-content: center !important;
+
+  padding: 10 px 20px !important;
+
+  box-sizing: border-box;
+
+  min-height: 0 !important;
+}
+
+
+/* Keep description from pushing the badge outside */
+.sidebar-card .small-description {
+  margin: 0 0 4px 0 !important;
+
+  line-height: 1.35 !important;
+}
+
+
+/* Green Normal badge */
+.sidebar-card .status-normal {
+  background: rgba(82, 190, 145, 0.16) !important;
+  color: #258c68 !important;
+}
+
+
+/* Green dot inside badge */
+.sidebar-card .status-normal::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: #52be91;
+
+  box-shadow: 0 0 0 4px rgba(82, 190, 145, 0.10);
+}
+
+
+/* Warning badge */
+.sidebar-card .status-warning {
+  background: rgba(255, 203, 116, 0.18) !important;
+  color: #a96d13 !important;
+}
+
+
+/* Warning dot */
+.sidebar-card .status-warning::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  margin-right: 7px;
+
+  border-radius: 50%;
+
+  background: #e8a735;
+
+  box-shadow: 0 0 0 4px rgba(232, 167, 53, 0.10);
+}
+
+.chart-axis-label {
+  fill: #ffffff;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dark-mode .chart-axis-label {
+  fill: #000000;
+  color: #000000;
+}
